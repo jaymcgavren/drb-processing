@@ -1,0 +1,37 @@
+!http://github.com/jaymcgavren/drb_processing/raw/master/screenshot1.png!
+
+
+h1. DRb-Processing
+
+Ruby-Processing, Internet-enabled.
+
+
+h1. Installation
+
+<pre>
+  gem install drb_processing
+</pre>
+
+
+h1. Running a Server
+
+<pre>
+  drb_processing_server
+</pre>
+
+
+h1. Connecting to a Server
+
+drb_processing &lt;server_url&gt;
+
+
+h1. Resources
+
+"Ruby-Processing Documentation":http://github.com/jashkenas/ruby-processing/wiki
+
+"Code Samples":http://www.github.com/jaymcgavren/rubyonacid
+
+
+h1. Copyright
+
+Copyright (c) 2010 Jay McGavren. Released under the MIT license. See the LICENSE file for details.
