@@ -67,16 +67,70 @@ describe MethodTee do
       lambda{@it.foo}.should raise_error
     end
     
-    it "includes a hash of objects called and the exceptions or return values they got"
+    it "includes a hash of objects called and the exceptions or return values they got" do
+      @it.halt_on_exception = false
+      object1 = Object.new
+      @it.add_method_tee object1
+      object2 = Object.new
+      @it.add_method_tee object2
+      object1.should_receive(:foo).and_raise("oh, no!")
+      object2.should_receive(:foo).and_return("bar")
+      begin
+        @it.foo
+      rescue Exception => exception
+        exception.results[object1][:exception].message.should == "oh, no!"
+        exception.results[object1][:return_value].should be_nil
+        exception.results[object2][:exception].should be_nil
+        exception.results[object2][:return_value].should == "bar"
+      end
+    end
     
-    it "is true by default"
+    it "is true by default" do
+      object1 = Object.new
+      @it.add_method_tee object1
+      object2 = Object.new
+      @it.add_method_tee object2
+      object1.should_receive(:foo).and_raise(RuntimeError)
+      object2.should_not_receive(:foo)
+      lambda{@it.foo}.should raise_error
+    end
     
   end
   
   describe "#use_first_return_value" do
-    it "returns the first return value when true"
-    it "returns an array of all return values when false"
-    it "is true by default"
+    
+    it "returns the first return value when true" do
+      @it.use_first_return_value = true
+      object1 = Object.new
+      @it.add_method_tee object1
+      object2 = Object.new
+      @it.add_method_tee object2
+      object1.should_receive(:foo).and_return(1)
+      object2.should_receive(:foo).and_return(2)
+      @it.foo.should == 1
+    end
+    
+    it "returns an array of all return values when false" do
+      @it.use_first_return_value = false
+      object1 = Object.new
+      @it.add_method_tee object1
+      object2 = Object.new
+      @it.add_method_tee object2
+      object1.should_receive(:foo).and_return(1)
+      object2.should_receive(:foo).and_return(2)
+      @it.foo.should == [1, 2]
+    end
+    
+    it "is true by default" do
+      object1 = Object.new
+      @it.add_method_tee object1
+      object2 = Object.new
+      @it.add_method_tee object2
+      object1.should_receive(:foo).and_return(1)
+      object2.should_receive(:foo).and_return(2)
+      @it.foo.should == 1
+    end
+    
   end
   
   
