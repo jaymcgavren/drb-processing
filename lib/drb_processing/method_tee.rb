@@ -24,7 +24,6 @@ class MethodTee
   end
   
   def method_missing(method, *arguments, &block)
-    # return_values = @method_tees.map{|object| object.__send__(method, *arguments)}
     return_values = []
     results = {}
     exceptions = {}

@@ -12,6 +12,7 @@ describe DRbProcessing::Client do
   describe "#connect" do
     
     it "connects to a server" do
+      pending
       server = DRbProcessing::Server.new 'druby://0.0.0.0:9000'
       server.start
       @it.connect 'druby://localhost:9000'
@@ -22,6 +23,7 @@ describe DRbProcessing::Client do
     end
     
     it "passes a Processing::App object to receive commands back from server" do
+      pending
       server = DRbProcessing::Server.new 'druby://0.0.0.0:9000'
       server.start
       @it.connect 'druby://localhost:9000'
@@ -33,5 +35,10 @@ describe DRbProcessing::Client do
     
   end
   
+  describe "#app" do
+    it "should not allow insecure methods like instance_eval"
+  end
+  
+  it "should not allow insecure methods like instance_eval"
   
 end

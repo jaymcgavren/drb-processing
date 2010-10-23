@@ -7,12 +7,10 @@ class Server < MethodTee
   
   %w{
     clone
-    define_singleton_method
     display
     dup
     extend
     freeze
-    instance_eval
     instance_exec
     instance_variable_defined?
     instance_variable_get
@@ -27,10 +25,9 @@ class Server < MethodTee
     load_libraries
     load_library
     load_ruby_library
+    instance_eval
   }.each do |method|
-    if method_defined?(method.to_sym)
-      undef_method(method.to_sym)
-    end
+    instance_eval "def #{method}(*args); raise NoMethodError; end"
   end
   
   def initialize(uri = 'druby://0.0.0.0:9000')
