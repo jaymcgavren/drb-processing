@@ -6,11 +6,11 @@ Gem::Specification.new do |s|
   s.name        = "drb-processing"
   s.version     = DrbProcessing::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["TODO: Write your name"]
-  s.email       = ["TODO: Write your email address"]
-  s.homepage    = "http://rubygems.org/gems/drb-processing"
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.authors     = ["Jay McGavren"]
+  s.email       = ["jay@mcgavren.com"]
+  s.homepage    = "http://github.com/jaymcgavren/drb-processing"
+  s.summary     = %q{A server that allows multiple users to view and program a shared Ruby-Processing sketch.}
+  s.description = %q{A server that allows multiple users to view and program a shared Ruby-Processing sketch.}
 
   s.rubyforge_project = "drb-processing"
 
