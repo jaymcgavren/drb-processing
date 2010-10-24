@@ -1,5 +1,5 @@
 require File.join(File.dirname(__FILE__), 'spec_helper')
-require 'drb_processing/server'
+require 'drb-processing/server'
 
 describe DRbProcessing::Server do
   

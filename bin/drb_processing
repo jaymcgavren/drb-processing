@@ -1,4 +1,4 @@
-require 'drb_processing/client'
+require 'drb-processing/client'
 class Sketch < Processing::App
   def setup
     render_mode P3D

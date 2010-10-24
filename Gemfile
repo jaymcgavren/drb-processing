@@ -1,4 +1,4 @@
 source "http://rubygems.org"
 
-# Specify your gem's dependencies in drb_processing.gemspec
+# Specify your gem's dependencies in drb-processing.gemspec
 gemspec

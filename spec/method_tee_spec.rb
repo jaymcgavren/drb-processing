@@ -1,5 +1,5 @@
 require File.join(File.dirname(__FILE__), 'spec_helper')
-require 'drb_processing/method_tee'
+require 'drb-processing/method_tee'
 
 describe MethodTee do
   

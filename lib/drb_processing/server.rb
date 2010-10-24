@@ -1,5 +1,5 @@
 require 'drb'
-require 'drb_processing/method_tee'
+require 'drb-processing/method_tee'
 
 module DRbProcessing
 
