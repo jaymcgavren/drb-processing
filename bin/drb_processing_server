@@ -1,0 +1,4 @@
+require 'drb_processing/server'
+server = DRbProcessing::Server.new 'druby://0.0.0.0:9000'
+server.start
+DRb.thread.join

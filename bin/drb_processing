@@ -1,0 +1,11 @@
+require 'drb_processing/client'
+class Sketch < Processing::App
+  def setup
+    render_mode P3D
+    $client = DRbProcessing::Client.new(self)
+    $client.connect ARGV[0]
+  end
+  def draw
+  end
+end
+Sketch.new(:width => 1080, :height => 768, :title => '', :full_screen => false)
