@@ -11,17 +11,25 @@ class Client
   end
   
   def connect(url)
-    DRb.start_service
-    @app.extend DRbUndumped
+    
+    #Start server only if one's not already running.
+    begin
+      DRb.current_server
+    rescue DRb::DRbServerNotFound
+      DRb.start_service
+    end
+    #Ensure DRb doesn't attempt to serialize Processing app.
+    @app.extend DRbUndumped unless @app.kind_of? DRbUndumped
+    
     undef_insecure_methods(@app)
     @server = DRbObject.new_with_uri(url)
     undef_insecure_methods(@server)
     @server.add_app(@app)
+    
   end
   
   def disconnect
     @server.remove_app(@app)
-    DRb.stop_service
   end
   
   def method_missing(name, *arguments)

@@ -11,6 +11,7 @@ class Server < MethodTee
     dup
     extend
     freeze
+    instance_eval
     instance_exec
     instance_variable_defined?
     instance_variable_get
@@ -25,9 +26,9 @@ class Server < MethodTee
     load_libraries
     load_library
     load_ruby_library
-    instance_eval
+    class_eval
   }.each do |method|
-    instance_eval "def #{method}(*args); raise NoMethodError; end"
+    class_eval "def #{method}(*args); puts('insecure method: #{method}'); end"
   end
   
   def initialize(uri = 'druby://0.0.0.0:9000')

@@ -12,7 +12,6 @@ describe DRbProcessing::Client do
   describe "#connect" do
     
     it "connects to a server" do
-      pending
       server = DRbProcessing::Server.new 'druby://0.0.0.0:9000'
       server.start
       @it.connect 'druby://localhost:9000'
@@ -23,7 +22,6 @@ describe DRbProcessing::Client do
     end
     
     it "passes a Processing::App object to receive commands back from server" do
-      pending
       server = DRbProcessing::Server.new 'druby://0.0.0.0:9000'
       server.start
       @it.connect 'druby://localhost:9000'
@@ -33,6 +31,33 @@ describe DRbProcessing::Client do
       server.stop
     end
     
+  end
+  
+  describe "#disconnect" do
+    it "removes Processing app from server" do
+      server = DRbProcessing::Server.new 'druby://0.0.0.0:9000'
+      server.start
+      @it.connect 'druby://localhost:9000'
+      @mock_app.should_receive(:oval).with(0, 0, 0, 0)
+      @it.oval(0, 0, 0, 0)
+      @it.disconnect
+      @mock_app.should_not_receive(:oval)
+      @it.oval(0, 0, 0, 0)
+      server.stop
+    end
+    
+    it "allows reconnection later" do
+      server = DRbProcessing::Server.new 'druby://0.0.0.0:9000'
+      server.start
+      @it.connect 'druby://localhost:9000'
+      @mock_app.should_receive(:oval).with(0, 0, 0, 0)
+      @it.oval(0, 0, 0, 0)
+      @it.disconnect
+      @it.connect 'druby://localhost:9000'
+      @mock_app.should_receive(:oval).with(0, 0, 0, 0)
+      @it.oval(0, 0, 0, 0)
+      server.stop
+    end
   end
   
   describe "#app" do
