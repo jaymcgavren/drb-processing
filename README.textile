@@ -9,20 +9,24 @@ Ruby-Processing, Internet-enabled.
 h1. Installation
 
 <pre>
-  gem install drb-processing
+  gem install ruby-processing drb-processing
 </pre>
 
 
 h1. Running a Server
 
 <pre>
-  drb-processing_server
+  drbpd
 </pre>
 
 
 h1. Connecting to a Server
 
-drb-processing &lt;server_url&gt;
+<pre>
+  rp5 live bin/drbp druby://&lt;server_address&gt;:9000
+</pre>
+
+
 
 
 h1. Resources
