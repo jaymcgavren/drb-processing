@@ -1,8 +1,10 @@
 require File.expand_path(File.dirname(__FILE__) + "/../lib/drb-processing/client")
+require 'logger'
 class Sketch < Processing::App
   def setup
     render_mode P3D
     $client = DRbProcessing::Client.new(self)
+    $client.logger = Logger.new(STDOUT)
     $client.connect ARGV[0]
   end
   def draw

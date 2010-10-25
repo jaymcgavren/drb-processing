@@ -1,10 +1,10 @@
 require File.join(File.dirname(__FILE__), 'spec_helper')
 require 'drb-processing/method_tee'
 
-describe MethodTee do
+describe DRbProcessing::MethodTee do
   
   before :each do
-    @it = MethodTee.new
+    @it = DRbProcessing::MethodTee.new
   end
   
   describe "#add_method_tee" do

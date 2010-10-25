@@ -1,9 +1,12 @@
 require 'drb'
 require 'drb-processing/method_tee'
+require 'drb-processing/logging'
 
 module DRbProcessing
 
 class Server < MethodTee
+  
+  include Logging
   
   %w{
     clone
@@ -42,9 +45,11 @@ class Server < MethodTee
     remove_method_tee(app)
   end
   def start
+    log.info "Starting service at #{@uri}"
     DRb.start_service(@uri, self)
   end
   def stop
+    log.info "Stopping service"
     DRb.stop_service
   end
 end

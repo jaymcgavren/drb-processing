@@ -1,4 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + "/../lib/drb-processing/server")
+require 'logger'
 server = DRbProcessing::Server.new 'druby://0.0.0.0:9000'
+server.logger = Logger.new(STDOUT)
 server.start
 DRb.thread.join

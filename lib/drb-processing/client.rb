@@ -1,8 +1,11 @@
 require 'drb'
+require 'drb-processing/logging'
 
 module DRbProcessing
 
 class Client
+  
+  include Logging
   
   attr_reader :app
   
@@ -22,9 +25,13 @@ class Client
     @app.extend DRbUndumped unless @app.kind_of? DRbUndumped
     
     undef_insecure_methods(@app)
+    log.info "Connecting to #{url}"
     @server = DRbObject.new_with_uri(url)
+    log.info "Connected to #{@server}"
     undef_insecure_methods(@server)
+    log.info "Subscribing #{@app} to method calls"
     @server.add_app(@app)
+    log.info "Subscribed #{@app} successfully"
     
   end
   
@@ -33,7 +40,10 @@ class Client
   end
   
   def method_missing(name, *arguments)
-    @server.__send__(name, *arguments)
+    log.debug "#{name}(#{arguments.join(', ')})"
+    result = @server.__send__(name, *arguments)
+    log.debug "result: #{result}"
+    result
   end
   
   private
