@@ -1,4 +1,4 @@
-require 'drb-processing/server'
+require File.expand_path(File.dirname(__FILE__) + "/../lib/drb-processing/server")
 server = DRbProcessing::Server.new 'druby://0.0.0.0:9000'
 server.start
 DRb.thread.join

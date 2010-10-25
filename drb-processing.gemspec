@@ -11,6 +11,7 @@ Gem::Specification.new do |s|
   s.homepage    = "http://github.com/jaymcgavren/drb-processing"
   s.summary     = %q{A server that allows multiple users to view and program a shared Ruby-Processing sketch.}
   s.description = %q{A server that allows multiple users to view and program a shared Ruby-Processing sketch.}
+  s.extra_rdoc_files = ["README.textile", "LICENSE"]
 
   s.rubyforge_project = "drb-processing"
 
