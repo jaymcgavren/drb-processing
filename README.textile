@@ -1,4 +1,4 @@
-!http://github.com/jaymcgavren/drb-processing/raw/master/drb-processing.png!
+!http://github.com/jaymcgavren/drb-processing/raw/master/drb-processing.jpg!
 
 
 h1. DRb-Processing
