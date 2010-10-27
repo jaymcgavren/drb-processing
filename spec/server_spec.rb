@@ -17,6 +17,29 @@ describe DRbProcessing::Server do
     end
     result = client.instance_eval('"unsafe code running in #{self.class.name}"')
     result.should be_nil
+    @it.stop
   end
+  
+  it "allows reconnection later" do
+    @it.start
+    @it.logger = Logger.new(STDOUT)
+    mock_app1 = Object.new
+    client1 = DRbProcessing::Client.new(mock_app1)
+    client1.logger = Logger.new(STDOUT)
+    client1.connect 'druby://localhost:9000'
+    mock_app2 = Object.new
+    client2 = DRbProcessing::Client.new(mock_app2)
+    client2.connect 'druby://127.0.0.1:9000'
+    mock_app1.should_receive(:oval).with(0, 0, 0, 0)
+    mock_app2.should_receive(:oval).with(0, 0, 0, 0)
+    client1.oval(0, 0, 0, 0)
+    client1.disconnect
+    client1.connect 'druby://localhost:9000'
+    mock_app1.should_receive(:rect).with(0, 0, 10, 10)
+    mock_app2.should_receive(:rect).with(0, 0, 10, 10)
+    client1.rect(0, 0, 10, 10)
+    @it.stop
+  end
+  
   
 end

@@ -25,9 +25,11 @@ class Client
     @app.extend DRbUndumped unless @app.kind_of? DRbUndumped
     
     undef_insecure_methods(@app)
-    log.info "Connecting to #{url}"
-    @server = DRbObject.new_with_uri(url)
-    log.info "Connected to #{@server}"
+    unless @server
+      log.info "Connecting to #{url}"
+      @server = DRbObject.new_with_uri(url)
+      log.info "Connected to #{@server}"
+    end
     undef_insecure_methods(@server)
     log.info "Subscribing #{@app} to method calls"
     @server.add_app(@app)
