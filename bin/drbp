@@ -1,4 +1,6 @@
 require File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib', 'drb-processing', 'client'))
+java_import 'java.awt.event.WindowEvent'
+java_import 'java.awt.event.KeyEvent'
 require 'logger'
 
 class Sketch < Processing::App
@@ -9,20 +11,31 @@ class Sketch < Processing::App
   end
   def draw
   end
-  def key_pressed(key)
-    $client.disconnect if key.key_code == 27 #Escape
+  def close
+    $client.disconnect
+    super
+  end
+  def determine_how_to_display(*args)
+    super
+    if @frame
+      @frame.add_window_listener do |event|
+        if event.id == WindowEvent::WINDOW_CLOSING
+          close
+        end
+      end
+      @frame.add_key_listener do |event|
+        if event.key_code == KeyEvent::VK_ESCAPE
+          close
+        end
+      end
+    end
+  end
+  def handleKeyEvent(event) #Not snake_case, we need to override an existing Java method!
+    if event.key_code == KeyEvent::VK_ESCAPE
+      close
+    end
+    super
   end
 end
 
 sketch = Sketch.new(:width => 640, :height => 480, :title => '', :full_screen => false)
-
-# def disconnect
-#   $client.disconnect
-# end
-# 
-# trap("INT") do
-#   disconnect
-#   sketch.stop
-# end
-# 
-# disconnect
