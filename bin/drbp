@@ -1,4 +1,7 @@
-require File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib', 'drb-processing', 'client'))
+#!/usr/bin/env ruby
+
+$: << File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib'))
+require 'drb-processing/client'
 java_import 'java.awt.event.WindowEvent'
 java_import 'java.awt.event.KeyEvent'
 require 'logger'
@@ -19,7 +22,7 @@ class Sketch < Processing::App
     super
     if @frame
       @frame.add_window_listener do |event|
-        if event.id == WindowEvent::WINDOW_CLOSING
+        if event.iD == WindowEvent::WINDOW_CLOSING #iD avoids warning meant for Object#id
           close
         end
       end
@@ -38,4 +41,4 @@ class Sketch < Processing::App
   end
 end
 
-sketch = Sketch.new(:width => 640, :height => 480, :title => '', :full_screen => false)
+sketch = Sketch.new(:width => 1280, :height => 1000, :title => '', :full_screen => false)
