@@ -8,24 +8,32 @@ Ruby-Processing, Internet-enabled.
 
 h1. Installation
 
-    gem install ruby-processing drb-processing
+<pre>
+  gem install ruby-processing drb-processing
+</pre>
 
 
 h1. Running a Server
 
-    $ drbpd
+<pre>
+  $ drbpd
+</pre>
 
 
 h1. Connecting to a Server
 
-    $ rp5 live bin/drbp druby://<server_address>:9000
+<pre>
+  $ rp5 live bin/drbp druby://<server_address>:9000
+</pre>
 
 When the prompt appears, call Processing::App methods on the proxy object stored in $client.  The call will be duplicated on all clients currently connected to the server.
 
-    >> $client.stroke 100, 255, 50, 128
-    => nil
-    >> $client.oval 100, 100, 300, 200
-    => nil
+<pre>
+  >> $client.stroke 100, 255, 50, 128
+  => nil
+  >> $client.oval 100, 100, 300, 200
+  => nil
+</pre>
 
 
 
