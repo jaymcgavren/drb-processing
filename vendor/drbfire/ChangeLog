@@ -1,0 +1,101 @@
+Wed Feb 25 20:56:11 2004  Nathaniel Talbott  <nathaniel@talbott.ws>
+
+	* Release 0.1.0. Really.
+
+	* lib/drb/drbfire.rb: Updated the version number. Also added a few
+	  nodoc directives.
+
+Wed Feb 25 20:05:10 2004  Nathaniel Talbott  <nathaniel@talbott.ws>
+
+	* Release 0.1.0.
+
+	* lib/drb/drbfire.rb: Simplified to only use one port.
+
+	* test/test_drbfire.rb: Removed obsolete tests related to the above
+	  change.
+
+	* lib/drb/drbfire.rb: Added id wrapping and one server per process
+	  caveats to the documentation.
+
+Sun Jan 18 22:24:10 2004  Nathaniel Talbott  <nathaniel@talbott.ws>
+
+	* Release 0.0.7.
+
+	* lib/drb/drbfire.rb: forgot to require timeout.
+
+Sun Jan 18 22:09:51 2004  Nathaniel Talbott  <nathaniel@talbott.ws>
+
+	* Release 0.0.6.
+
+Sun Jan 18 22:00:44 2004  Nathaniel Talbott  <nathaniel@talbott.ws>
+
+	* lib/drb/drbfire.rb: ignored connections with invalid client ids.
+
+	* *: added copyright notices.
+
+	* lib/drb/drbfire.rb: added RDoc.
+
+	* README: added.
+
+	* INSTALL: added.
+
+Sat Jan 17 13:03:27 2004  Nathaniel Talbott  <nathaniel@talbott.ws>
+
+	* lib/drb/drbfire.rb: increased robustness when accepting connections.
+
+	* lib/drb/drbfire.rb: fixed a race condition when accepting signal
+	  connections.
+
+	* test/test_drbfire.rb: use the packet format constant.
+
+	* lib/drb/drbfire.rb: added a VERSION constant.
+
+	* Release 0.0.5.
+
+Fri Jan 16 14:34:52 2004  Nathaniel Talbott  <nathaniel@talbott.ws>
+
+	* Release 0.0.4.
+
+Fri Jan 16 14:30:13 2004  Nathaniel Talbott  <nathaniel@talbott.ws>
+
+	* test/test_drbfire.rb: improved the overall communication tests to
+	  include client-side callbacks.
+
+	* lib/drb/drbfire.rb: fixed a bug with client-side callbacks caused by
+	  improperly reporting the uri.
+
+	* samples/*.rb: improved the samples to include client-side callbacks.
+
+Fri Jan 16 11:32:40 2004  Nathaniel Talbott  <nathaniel@talbott.ws>
+
+	* Release 0.0.3.
+
+Fri Jan 16 11:30:58 2004  Nathaniel Talbott  <nathaniel@talbott.ws>
+
+	* lib/drb/drbfire.rb: added debugging code.
+
+Fri Jan 16 11:11:02 2004  Nathaniel Talbott  <nathaniel@talbott.ws>
+
+	* samples/server.rb: improved argument handling and added the ability
+	  to specify the use of ssl.
+
+	* samples/client.rb: ditto.
+
+	* lib/drb/drbfire.rb: removed old debugging code.
+
+Fri Jan 16 10:41:53 2004  Nathaniel Talbott  <nathaniel@talbott.ws>
+
+	* samples/server.rb: added the ability to specify the host on the
+	  commandline.
+
+	* samples/client.rb: ditto.
+
+Thu Jan 15 21:01:02 2004  Nathaniel Talbott  <nathaniel@talbott.ws>
+
+	* Release 0.0.2.
+
+Thu Jan 15 20:59:08 2004  Nathaniel Talbott  <nathaniel@talbott.ws>
+
+	* Changed how client id's are packed.
+
+vim: set noexpandtab

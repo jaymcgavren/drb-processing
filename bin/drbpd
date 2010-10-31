@@ -1,10 +1,14 @@
 #!/usr/bin/env ruby
 
 $: << File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib'))
+$: << File.expand_path(File.join(File.dirname(__FILE__), '..', 'vendor', 'drbfire', 'lib'))
 require 'drb-processing/server'
 require 'logger'
 
-server = DRbProcessing::Server.new 'druby://0.0.0.0:9000'
+address = ARGV.shift
+port = ARGV.shift
+
+server = DRbProcessing::Server.new address, port
 server.logger = Logger.new(STDOUT)
 server.start
 DRb.thread.join

@@ -1,5 +1,6 @@
-$LOAD_PATH.unshift(File.dirname(__FILE__))
-$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
+$: << File.expand_path(File.dirname(__FILE__))
+$: << File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib'))
+$: << File.expand_path(File.join(File.dirname(__FILE__), '..', 'vendor', 'drbfire', 'lib'))
 require 'rubygems'
 require 'spec'
 require 'spec/autorun'

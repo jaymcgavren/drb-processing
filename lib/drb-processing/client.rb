@@ -1,4 +1,4 @@
-require 'drb'
+require 'drb/drbfire'
 require 'drb-processing/logging'
 
 module DRbProcessing
@@ -13,13 +13,17 @@ class Client
     @app = app
   end
   
-  def connect(url)
+  def connect(address, port)
+    
+    url = "drbfire://#{address}:#{port}"
     
     #Start server only if one's not already running.
     begin
-      DRb.current_server
-    rescue DRb::DRbServerNotFound
-      DRb.start_service
+      log.debug "DRb.current_server: "
+      log.debug DRb.current_server.to_s
+    rescue DRb::DRbServerNotFound => exception
+      log.debug %Q/No current server: #{exception.message}\n#{exception.backtrace.join("\n")}/
+      DRb.start_service(url, nil, DRbFire::ROLE => DRbFire::CLIENT)
     end
     #Ensure DRb doesn't attempt to serialize Processing app.
     @app.extend DRbUndumped unless @app.kind_of? DRbUndumped

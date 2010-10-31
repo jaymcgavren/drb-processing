@@ -1,16 +1,24 @@
 #!/usr/bin/env ruby
 
+address, port = ARGV
+
 $: << File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib'))
+$: << File.expand_path(File.join(File.dirname(__FILE__), '..', 'vendor', 'drbfire', 'lib'))
 require 'drb-processing/client'
 java_import 'java.awt.event.WindowEvent'
 java_import 'java.awt.event.KeyEvent'
 require 'logger'
 
 class Sketch < Processing::App
+  def initialize(options = {})
+    @address = options[:address]
+    @port = options[:port] || 9000
+    super
+  end
   def setup
     $client = DRbProcessing::Client.new(self)
     $client.logger = Logger.new(STDOUT)
-    $client.connect ARGV[0]
+    $client.connect @address, @port
   end
   def draw
   end
@@ -41,4 +49,4 @@ class Sketch < Processing::App
   end
 end
 
-sketch = Sketch.new(:width => 1280, :height => 1000, :title => '', :full_screen => false)
+sketch = Sketch.new(:address => address, :port => port, :width => 1280, :height => 1000, :title => '', :full_screen => false)

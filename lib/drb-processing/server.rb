@@ -1,4 +1,4 @@
-require 'drb'
+require 'drb/drbfire'
 require 'drb-processing/method_tee'
 require 'drb-processing/logging'
 
@@ -34,9 +34,10 @@ class Server < MethodTee
     class_eval "def #{method}(*args); puts('insecure method: #{method}'); end"
   end
   
-  def initialize(uri = 'druby://0.0.0.0:9000')
+  def initialize(address = '0.0.0.0', port = 9000)
     super()
-    @uri = uri
+    @address = address
+    @port = port
   end
   def add_app(app)
     add_method_tee(app)
@@ -45,8 +46,9 @@ class Server < MethodTee
     remove_method_tee(app)
   end
   def start
-    log.info "Starting service at #{@uri}"
-    DRb.start_service(@uri, self)
+    uri = "drbfire://#{@address}:#{@port}"
+    log.info "Starting service at #{uri}"
+    DRb.start_service(uri, self, DRbFire::ROLE => DRbFire::SERVER)
   end
   def stop
     log.info "Stopping service"

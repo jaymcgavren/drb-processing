@@ -4,14 +4,14 @@ require 'drb-processing/server'
 describe DRbProcessing::Server do
   
   before :each do
-    @it = DRbProcessing::Server.new 'druby://0.0.0.0:9000'
+    @it = DRbProcessing::Server.new 'localhost', 9000
   end
   
   it "should not allow insecure methods like instance_eval" do
     @it.start
     @mock_app = Object.new
     client = DRbProcessing::Client.new(@mock_app)
-    client.connect 'druby://0.0.0.0:9000'
+    client.connect 'localhost', 9000
     class <<client
       undef_method :instance_eval
     end
@@ -26,17 +26,12 @@ describe DRbProcessing::Server do
     mock_app1 = Object.new
     client1 = DRbProcessing::Client.new(mock_app1)
     client1.logger = Logger.new(STDOUT)
-    client1.connect 'druby://localhost:9000'
-    mock_app2 = Object.new
-    client2 = DRbProcessing::Client.new(mock_app2)
-    client2.connect 'druby://127.0.0.1:9000'
+    client1.connect 'localhost', 9000
     mock_app1.should_receive(:oval).with(0, 0, 0, 0)
-    mock_app2.should_receive(:oval).with(0, 0, 0, 0)
     client1.oval(0, 0, 0, 0)
     client1.disconnect
-    client1.connect 'druby://localhost:9000'
+    client1.connect 'localhost', 9000
     mock_app1.should_receive(:rect).with(0, 0, 10, 10)
-    mock_app2.should_receive(:rect).with(0, 0, 10, 10)
     client1.rect(0, 0, 10, 10)
     @it.stop
   end
