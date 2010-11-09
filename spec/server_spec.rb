@@ -36,5 +36,14 @@ describe DRbProcessing::Server do
     @it.stop
   end
   
+  it "disconnects a client if they appear to have dropped"
+  
+  it "continues serving other clients if a client is dropped"
+  
+  it "maintains connection even if a method call throws an exception"
+  
+  it "rejects clients not approved by ACL"
+  
+  it "can reload ACL from disk on demand"
   
 end

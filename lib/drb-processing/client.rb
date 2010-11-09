@@ -47,7 +47,11 @@ class Client
   
   def method_missing(name, *arguments)
     log.debug "#{name}(#{arguments.join(', ')})"
-    result = @server.__send__(name, *arguments)
+    begin
+      result = @server.__send__(name, *arguments)
+    rescue Exception => exception
+      log.warn "#{exception}: #{exception.message}\n#{exception.backtrace.join(%Q{\n})}"
+    end
     log.debug "result: #{result}"
     result
   end
@@ -71,6 +75,7 @@ class Client
           instance_variables
           public_send
           remove_instance_variable
+          save
           send
           tap
           library_loaded?
